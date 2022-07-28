@@ -1,0 +1,47 @@
+---
+title: "Simulation"
+author: "Valerie McIlvaine"
+date: "7/20/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+
+```{r Begin simulation coin toss, binomial}
+#tossing a coin
+
+coin_toss= c("Heads", "Tails")
+set.seed(1)
+y=sample(coin_toss, 10, replace = TRUE ) #take sample of 10
+length(y[y=="Heads"])
+y
+
+#replicate tosses 50 times 
+replicate(50, sample( coin_toss, 10, replace= TRUE))
+first=replicate(50, length(sample(coin_toss, 10, replace= TRUE)[y=="Heads"])) #assign vector first
+mean(first)
+
+#bimonial
+
+rbinom(20, 4, .2)
+table(rbinom(20, 4, .2))
+```
+```{r simulating from  binomial dist of 10 with p=.42}
+x <- 0:10
+x
+
+#vector of probabilities
+sim <-dbinom(x, 10, .42)
+sim
+#check to make sure sum=1
+sum(sim)
+```
+
+
+
+
+
