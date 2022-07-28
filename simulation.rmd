@@ -34,11 +34,30 @@ table(rbinom(20, 4, .2))
 x <- 0:10
 x
 
-#vector of probabilities
+#vector of probabilities from binomial dist of 10
 sim <-dbinom(x, 10, .42)
 sim
 #check to make sure sum=1
 sum(sim)
+
+weighted.mean(x,sim)
+#varaince
+weighted.mean((x-4.2)^2, sim)
+#sd
+weighted.mean((x-4.2)^2, sim)^.5
+
+#prob histogram
+qplot(x,weight=sim, geom="histogram", bins=10)+
+  ggtitle("Probability Histogram")
+
+```
+
+```{r my own function}
+vals_function<- function(inputs){
+  output_something<- do_something(inputs)
+  return(output_value)
+}
+
 ```
 
 

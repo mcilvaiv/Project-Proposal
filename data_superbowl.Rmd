@@ -8,6 +8,11 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+library(readr)
+devtools::install_github("rstudio/gt")
+install.packages("gt")
+library(gt)
+library(glue)
 
 ```
 
@@ -93,11 +98,9 @@ total11 %>%
        scale_color_brewer(palette="") + 
   theme_classic()+theme(legend.position="top")
  
- 
-  ggplot(data=total11, aes(x=year)) +
-  geom_bar( stat="count", position="dodge",colour="black", aes(fill=diversity))
-     
-   
+  
+  ggplot(data=total, aes(x=year)) +
+  geom_bar( stat="count", position="dodge",colour="black", aes(fill=diversity)) 
 
   
 ```
@@ -121,30 +124,15 @@ geom_boxplot(fill="lightblue")+
 ggtitle("Boxplots of Cost Per Ad by Category")+
 xlab("Ad Category")+
 ylab("Ad Cost in Millions")
-
-
-#jitter 
-ggplot(data=total11, aes(x=fct_reorder(category,cost_of_ad_in_millions), y= cost_of_ad_in_millions, colour = interaction(category ))) + 
-      geom_point(alpha = 0.3, position = "jitter") +
-      geom_boxplot(alpha = 0, colour = "black")+
-         ggtitle("Boxplots of Cost Per Ad by Category")+
-         xlab("Ad Category")+
-         ylab("Cost in Millions")
-         
-#ad Length by year and category        
-total11 %>%
-  group_by(category) %>%
-  ggplot(aes(x = year, y = ad_time, group = category, color= category)) +
- geom_point(alpha = 0.3)+
-   ggtitle("Ad Length by Year and Ad Category")+
-         ylab("Ad Length in Seconds")
-        
 ```
 
 
 
 ```{r tables}
 
+total11 %>%
+group_by(year) %>%
+  summarize_at()
 
 
 ```
